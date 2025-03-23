@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:node_demo/custom_textfield.dart';
-import 'package:node_demo/screens/login_screen.dart';
-// import 'package:flutter_node_auth/services/auth_services.dart';
+import 'package:flutter_node_auth/custom_textfield.dart';
+import 'package:flutter_node_auth/screens/login_screen.dart';
+import 'package:flutter_node_auth/services/auth_services.dart';
 
 class SignupScreen extends StatefulWidget {
-  const SignupScreen({super.key});
+  const SignupScreen({Key? key}) : super(key: key);
 
   @override
   State<SignupScreen> createState() => _SignupScreenState();
@@ -14,16 +14,16 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
-  // final AuthService authService = AuthService();
+  final AuthService authService = AuthService();
 
-  // void signupUser() {
-  //   authService.signUpUser(
-  //     context: context,
-  //     email: emailController.text,
-  //     password: passwordController.text,
-  //     name: nameController.text,
-  //   );
-  // }
+  void signupUser() {
+    authService.signUpUser(
+      context: context,
+      email: emailController.text,
+      password: passwordController.text,
+      name: nameController.text,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,10 @@ class _SignupScreenState extends State<SignupScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text("Signup", style: TextStyle(fontSize: 30)),
+          const Text(
+            "Signup",
+            style: TextStyle(fontSize: 30),
+          ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.08),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -58,13 +61,13 @@ class _SignupScreenState extends State<SignupScreen> {
           ),
           const SizedBox(height: 40),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: signupUser,
             style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all(Colors.blue),
-              textStyle: WidgetStateProperty.all(
+              backgroundColor: MaterialStateProperty.all(Colors.blue),
+              textStyle: MaterialStateProperty.all(
                 const TextStyle(color: Colors.white),
               ),
-              minimumSize: WidgetStateProperty.all(
+              minimumSize: MaterialStateProperty.all(
                 Size(MediaQuery.of(context).size.width / 2.5, 50),
               ),
             ),
@@ -78,7 +81,9 @@ class _SignupScreenState extends State<SignupScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const LoginScreen()),
+                MaterialPageRoute(
+                  builder: (context) => const LoginScreen(),
+                ),
               );
             },
             child: const Text('Login User?'),

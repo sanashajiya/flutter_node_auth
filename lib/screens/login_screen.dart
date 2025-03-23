@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:node_demo/custom_textfield.dart';
-// import 'package:node_demo/services/auth_services.dart';
+import 'package:flutter_node_auth/custom_textfield.dart';
+import 'package:flutter_node_auth/services/auth_services.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -12,15 +12,15 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  // final AuthService authService = AuthService();
+  final AuthService authService = AuthService();
 
-  // void loginUser() {
-  //   authService.signInUser(
-  //     context: context,
-  //     email: emailController.text,
-  //     password: passwordController.text,
-  //   );
-  // }
+  void loginUser() {
+    authService.signInUser(
+      context: context,
+      email: emailController.text,
+      password: passwordController.text,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           const SizedBox(height: 40),
           ElevatedButton(
-            onPressed: (){},
+            onPressed: loginUser,
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(Colors.blue),
               textStyle: MaterialStateProperty.all(
